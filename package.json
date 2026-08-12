@@ -1,0 +1,8 @@
+{
+  "name": "padel-round",
+  "private": true,
+  "version": "1.0.5",
+  "dependencies": {
+    "@netlify/blobs": "10.7.10"
+  }
+}
