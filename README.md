@@ -15,3 +15,11 @@ Hotfix changes:
 - Result images are exported and previewed at Instagram Story size: 1080×1920 (9:16).
 - Podium template maps 1st place to gold/center, 2nd to silver/left, and 3rd to bronze/right.
 - Shared read-only leaderboard player statistics now mirror the in-session statistics view, including match history and best-partner win-rate details.
+
+
+## v1.0.6-hotfix-2
+- Fixed player statistics in shared read-only result pages, including Americano schedules.
+- Kept 1080×1920 / 9:16 result-image output.
+- Strengthened centered session-name typography and lighter metadata hierarchy.
+- Made leaderboard cards slightly translucent over photo backgrounds.
+- Lowered the podium layout while preserving 1st=gold center, 2nd=silver left, 3rd=bronze right.

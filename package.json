@@ -1,7 +1,7 @@
 {
   "name": "padel-round",
   "private": true,
-  "version": "1.0.6",
+  "version": "1.0.6-hotfix-2",
   "dependencies": {
     "@netlify/blobs": "10.7.10"
   }
