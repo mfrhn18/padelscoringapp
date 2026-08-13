@@ -23,3 +23,10 @@ Hotfix changes:
 - Strengthened centered session-name typography and lighter metadata hierarchy.
 - Made leaderboard cards slightly translucent over photo backgrounds.
 - Lowered the podium layout while preserving 1st=gold center, 2nd=silver left, 3rd=bronze right.
+
+
+## v1.0.6-hotfix-3
+- Moved the first Top 3 leaderboard image template down to match the podium composition.
+- Brightened uploaded photo backgrounds by reducing the image darkening overlay.
+- Fixed shared-result player-name clicks to open the player statistics modal using the fetched read-only public snapshot.
+- Removed edit controls from the public stats modal.
