@@ -1,32 +1,9 @@
-Padel Round v1.0.6 hotfix
+# Padel Round v1.0.7
 
-Changes:
-- Live/ongoing score input now has a Reset score control that clears the selected match pair scores back to --. Finished sessions remain locked.
-- Share links now use a real 26-character server-side share ID. Finished session snapshots are stored in Netlify Blobs and retrieved at /results/<id>, so the URL contains no encoded session data.
-- Existing v1.0.4 functionality is preserved: Reopen/read-only sessions, Best Partner win-rate statistics, leaderboard, Mexicano/Team Mexicano/Mixicano/Americano logic, Share result page, dashboard UI, and Mixicano-only result labels.
-
-Deploy this package to Netlify. Netlify Functions and Blobs are required for the short Share URL feature.
-
-- Share button now offers Share result URL or Create result image.
-- Result image pilot includes three dynamic templates, top-3 leaderboard rendering, user photo as the background for every template, and selectable web-safe fonts.
-
-
-Hotfix changes:
-- Result images are exported and previewed at Instagram Story size: 1080×1920 (9:16).
-- Podium template maps 1st place to gold/center, 2nd to silver/left, and 3rd to bronze/right.
-- Shared read-only leaderboard player statistics now mirror the in-session statistics view, including match history and best-partner win-rate details.
-
-
-## v1.0.6-hotfix-2
-- Fixed player statistics in shared read-only result pages, including Americano schedules.
-- Kept 1080×1920 / 9:16 result-image output.
-- Strengthened centered session-name typography and lighter metadata hierarchy.
-- Made leaderboard cards slightly translucent over photo backgrounds.
-- Lowered the podium layout while preserving 1st=gold center, 2nd=silver left, 3rd=bronze right.
-
-
-## v1.0.6-hotfix-3
-- Moved the first Top 3 leaderboard image template down to match the podium composition.
-- Brightened uploaded photo backgrounds by reducing the image darkening overlay.
-- Fixed shared-result player-name clicks to open the player statistics modal using the fetched read-only public snapshot.
-- Removed edit controls from the public stats modal.
+## v1.0.7 changes
+- Added a personalized **Player Spotlight** result-image template for shared result URLs.
+- From a player's shared-result stats modal, the player can choose **Create my result image**, upload their own photo, select a font, then share/download a 1080×1920 image.
+- Personalized image shows the player's final rank, playing stats, and the two closest ranked players.
+- Fixed shared-result player statistics: clicking a player name on `/results/<id>` now opens the full read-only stats modal with games, wins, losses, ties, win rate, points, match history, and best partners.
+- Shared-result stats modal has no editing controls, but can launch the personalized result-image flow.
+- Existing v1.0.6-hotfix-4 templates and functionality are preserved.
