@@ -1,38 +1,28 @@
-## v1.0.8-hotfix-2
+# Padel Round v1.1.0-hotfix-11
 
-- Added Player Spotlight result-image template and shared player statistics improvements.
-- Added public/shared-result Player Spotlight image generation.
-- Improved Mexicano court allocation based on the number of active players: only complete courts of four are scheduled, up to the configured court limit.
-- Preserved v1.0.6-hotfix-5 Team Americano matchmaking, additional-round generation, and session reset behavior.
-Padel Round v1.0.6 hotfix
+Tournament-only hotfix.
 
-Changes:
-- Live/ongoing score input now has a Reset score control that clears the selected match pair scores back to --. Finished sessions remain locked.
-- Share links now use a real 26-character server-side share ID. Finished session snapshots are stored in Netlify Blobs and retrieved at /results/<id>, so the URL contains no encoded session data.
-- Existing v1.0.4 functionality is preserved: Reopen/read-only sessions, Best Partner win-rate statistics, leaderboard, Mexicano/Team Mexicano/Mixicano/Americano logic, Share result page, dashboard UI, and Mixicano-only result labels.
+Fixes:
+- Corrects knockout history stage sizing: an 8-pair bracket now has 4 Quarterfinals, 2 Semifinals, and 1 Final.
+- Corrects 16-pair brackets to 8 Quarterfinals, 4 Semifinals, and 1 Final.
+- Synchronizes the first knockout-stage history with the actual number of live match cards (pairs / 2), so completed first-stage scores are preserved.
+- Resolves winners into the correct downstream knockout match slots immediately.
+- Makes resolved downstream knockout matches fully playable/scorable.
+- Maps semifinal winners to Final and semifinal losers to 3rd Place immediately when enabled.
+- Keeps future-stage placeholders until their source matches are completed.
+- Keeps the selected knockout-stage header synchronized with the Quarterfinal / Semifinal / 3rd Place / Final tab.
+- Leaves non-Tournament modes unchanged.
 
-Deploy this package to Netlify. Netlify Functions and Blobs are required for the short Share URL feature.
-
-- Share button now offers Share result URL or Create result image.
-- Result image pilot includes three dynamic templates, top-3 leaderboard rendering, user photo as the background for every template, and selectable web-safe fonts.
-
-
-Hotfix changes:
-- Result images are exported and previewed at Instagram Story size: 1080×1920 (9:16).
-- Podium template maps 1st place to gold/center, 2nd to silver/left, and 3rd to bronze/right.
-- Shared read-only leaderboard player statistics now mirror the in-session statistics view, including match history and best-partner win-rate details.
+Validation cases:
+- 4 pairs: 2 QF-equivalent first-round matches -> 1 Final.
+- 6 pairs: bracketed with byes -> correct first knockout stage -> 2 Semifinals -> Final.
+- 8 pairs: 4 Quarterfinals -> 2 Semifinals -> Final.
+- 10/12 pairs: bracket expands to 16 slots with byes -> 8 Quarterfinals -> 4 Semifinals -> Final.
+- 16 pairs: 8 Quarterfinals -> 4 Semifinals -> Final.
 
 
-## v1.0.6-hotfix-2
-- Fixed player statistics in shared read-only result pages, including Americano schedules.
-- Kept 1080×1920 / 9:16 result-image output.
-- Strengthened centered session-name typography and lighter metadata hierarchy.
-- Made leaderboard cards slightly translucent over photo backgrounds.
-- Lowered the podium layout while preserving 1st=gold center, 2nd=silver left, 3rd=bronze right.
+## v1.1.0-hotfix-13
+- Tournament-only fix: 3rd Place score input now resolves the `thirdPlace` history stage correctly.
+- No regular Americano/Mexicano/Mixicano/Team mode logic was intentionally changed.
 
-
-## v1.0.6-hotfix-3
-- Moved the first Top 3 leaderboard image template down to match the podium composition.
-- Brightened uploaded photo backgrounds by reducing the image darkening overlay.
-- Fixed shared-result player-name clicks to open the player statistics modal using the fetched read-only public snapshot.
-- Removed edit controls from the public stats modal.
+- v1.1.0-hotfix-14: Fixed 3rd Place score selection so the `thirdPlace` stage key is preserved when submitting a score. The previous hotfix fixed the stage lookup, but the modal converted `thirdPlace` to `NaN` before calling the save handler.
