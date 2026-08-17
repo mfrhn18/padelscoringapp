@@ -1,38 +1,38 @@
-## v1.0.8-hotfix-2
+# Padel Round v1.1.2
 
-- Added Player Spotlight result-image template and shared player statistics improvements.
-- Added public/shared-result Player Spotlight image generation.
-- Improved Mexicano court allocation based on the number of active players: only complete courts of four are scheduled, up to the configured court limit.
-- Preserved v1.0.6-hotfix-5 Team Americano matchmaking, additional-round generation, and session reset behavior.
-Padel Round v1.0.6 hotfix
+Tournament Mode refinement release, based on v1.1.1.
 
-Changes:
-- Live/ongoing score input now has a Reset score control that clears the selected match pair scores back to --. Finished sessions remain locked.
-- Share links now use a real 26-character server-side share ID. Finished session snapshots are stored in Netlify Blobs and retrieved at /results/<id>, so the URL contains no encoded session data.
-- Existing v1.0.4 functionality is preserved: Reopen/read-only sessions, Best Partner win-rate statistics, leaderboard, Mexicano/Team Mexicano/Mixicano/Americano logic, Share result page, dashboard UI, and Mixicano-only result labels.
+## Tournament scoring UI
+- Removed the Tournament Scoring configuration block from the **New Session** setup flow.
+- Tournament Mode now exposes a **Scoring · [Stage]** button beside **Edit Players** in the Match tab.
+- The button opens a modal for the currently viewed tournament stage only.
+- Scoring Type and Finish Rule can be changed independently for Group Stage, Round of 16 / Quarterfinal, Semifinal, 3rd Place, and Final as applicable.
+- Changes are saved to the tournament and immediately become the active scoring rule for that stage's score input.
 
-Deploy this package to Netlify. Netlify Functions and Blobs are required for the short Share URL feature.
+## Group Stage + Knockouts bracket
+- The knockout draw is now finalized when the tournament session is created rather than being regenerated from current group standings whenever the Leaderboard is opened.
+- For the standard 2-group / top-2 format, the draw is fixed as **A1 vs B2** and **B1 vs A2**.
+- Larger group structures use a fixed seeded draw that avoids same-group pairings where possible and prioritizes top-vs-runner-up matchups instead of top-vs-top.
+- If a non-power-of-two qualification count requires additional places, fixed **Best 3rd** slots are reserved at creation and resolved to the eligible third-place qualifiers after the Group Stage.
+- Before Group Stage completion, the Leaderboard shows the fixed slot labels (for example A1, B2, B1, A2) and they no longer change when switching between Group A, Group B, and Knockout views.
+- After **Advance Group Stage →**, the same fixed bracket slots are populated with the actual qualified teams.
 
-- Share button now offers Share result URL or Create result image.
-- Result image pilot includes three dynamic templates, top-3 leaderboard rendering, user photo as the background for every template, and selectable web-safe fonts.
+## Knockout-only bracket
+- Existing knockout mapping and scoring behavior is retained.
+- The **3rd Place** bracket now resolves to the two semifinal losers once both semifinal results are completed.
+- The 3rd Place bracket also displays its completed score when available.
+- Existing Final and other knockout bracket score display remains intact.
 
+## Compatibility / scope
+- Changes are intentionally limited to **Tournament Mode**.
+- Existing Americano, Mexicano, Mixicano, Team Americano, Team Mexicano, King of the Hill, and other non-Tournament behavior is preserved.
+- Existing tournament score-input and stage-navigation fixes are retained.
 
-Hotfix changes:
-- Result images are exported and previewed at Instagram Story size: 1080×1920 (9:16).
-- Podium template maps 1st place to gold/center, 2nd to silver/left, and 3rd to bronze/right.
-- Shared read-only leaderboard player statistics now mirror the in-session statistics view, including match history and best-partner win-rate details.
-
-
-## v1.0.6-hotfix-2
-- Fixed player statistics in shared read-only result pages, including Americano schedules.
-- Kept 1080×1920 / 9:16 result-image output.
-- Strengthened centered session-name typography and lighter metadata hierarchy.
-- Made leaderboard cards slightly translucent over photo backgrounds.
-- Lowered the podium layout while preserving 1st=gold center, 2nd=silver left, 3rd=bronze right.
-
-
-## v1.0.6-hotfix-3
-- Moved the first Top 3 leaderboard image template down to match the podium composition.
-- Brightened uploaded photo backgrounds by reducing the image darkening overlay.
-- Fixed shared-result player-name clicks to open the player statistics modal using the fetched read-only public snapshot.
-- Removed edit controls from the public stats modal.
+## Suggested test matrix
+1. Tournament → Group Stage + Knockouts → 8 pairs / 2 groups / top 2.
+2. Immediately open Leaderboard → Knockout and switch Group A → Group B → Knockout repeatedly. Verify A1/B2/B1/A2 never change.
+3. Complete Group Stage and click **Advance Group Stage →**. Verify the fixed slots populate with actual teams without changing the matchup positions.
+4. In Match tab, open **Scoring · Group Stage**, change scoring, and verify Group Stage score input follows it.
+5. Open each knockout stage's Scoring button and verify its configuration is independent.
+6. Knockouts Only → complete Semifinals → open Leaderboard. Verify 3rd Place shows the two semifinal losers and completed scores when entered.
+7. Confirm non-Tournament modes behave exactly as before.
